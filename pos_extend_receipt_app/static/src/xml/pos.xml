@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+	<t t-name="OrderReceipt" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('pos-receipt-contact')]" position="before">
+			<t t-if="env.pos.config.order_number">
+				<div align="center">
+					<t t-if="env.pos.config.order_number">
+						<t t-esc='env.pos.get_order().name'/><br/>
+					</t>
+				</div>
+			</t>
+		</xpath>
+		<xpath expr="//div[hasclass('pos-receipt-contact')]" position="after">
+			<t t-if="env.pos.config.customer_details">
+				<br/>
+				<t t-if="props.order.partner">
+					<div style="font-size: 0.75em;" align="center">
+						<t t-if="env.pos.config.customer_name">
+							Customer Name : <t t-esc='props.order.partner.name' /><br/>
+						</t>
+						<t t-if="env.pos.config.customer_address">
+							Address : <t t-if="props.order.partner.address != false"> <t t-esc='props.order.partner.address' /></t><br/>
+						</t>
+						<t t-if="env.pos.config.customer_mobile">
+							Mobile No. : <t t-if="props.order.partner.mobile != false"><t t-esc='props.order.partner.mobile' /></t><br/>
+						</t>
+						<t t-if="env.pos.config.customer_phone">
+							Phone : <t t-if="props.order.partner.phone != false"><t t-esc='props.order.partner.phone' /></t><br/>
+						</t>
+						<t t-if="env.pos.config.customer_email">
+							Email : <t t-if="props.order.partner.email != false"><t t-esc='props.order.partner.email' /></t><br/>
+						</t>
+						<t t-if="env.pos.config.customer_vat">
+							Tax : <t t-if="props.order.partner.vat != false"><t t-esc='props.order.partner.vat' /></t><br/>
+						</t>
+					</div>
+				</t>
+			</t>
+
+			<t t-if="receipt.invoice_number and env.pos.config.invoice_number">
+				<br/>
+					<div align="center">
+						<strong><u>Invoice Number</u></strong><br></br>
+						<td>
+							<t t-esc="receipt.invoice_number"/>
+						</td>
+					</div>
+				<br/>
+			</t>
+
+		</xpath>
+		<xpath expr="//div[hasclass('pos-receipt')]" position="inside">
+			<t t-if="env.pos.config.order_barcode">
+				<t t-if="env.pos.config.barcode_selection == 'qrcode'">
+					<div class="text-center" align="center">
+						<img t-att-src="qrcode" style="height: 200px;width: 200px;"/>
+					</div>
+				</t>
+				<t t-if="env.pos.config.barcode_selection == 'barcode'">
+					<div class="text-center" align="center">
+						<img t-att-src="barcode" style="height: 50px;width: 230px;"/>
+					</div>
+				</t>
+			</t>
+		</xpath>
+	</t>
+
+</templates>
