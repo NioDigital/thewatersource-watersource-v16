@@ -38,6 +38,14 @@
 				</t>
 			</t>
 
+			<t t-if="env.pos.config.branch_address">
+				<br/>
+					<div align="center">
+						<t t-esc="env.pos.config.address_details"/>
+					</div>
+				<br/>
+			</t>
+
 			<t t-if="receipt.invoice_number and env.pos.config.invoice_number">
 				<br/>
 					<div align="center">

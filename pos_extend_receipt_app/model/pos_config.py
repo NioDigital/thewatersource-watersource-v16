@@ -16,7 +16,9 @@ class PosConfigInherit(models.Model):
 	order_number = fields.Boolean('Order Number')
 	customer_email = fields.Boolean('Customer Email')
 	customer_vat = fields.Boolean('Customer Vat')
-
+	branch_address = fields.Boolean('Shop Address')
+	address_details = fields.Text('Address')
+	invoice_print = fields.Boolean()
 
 
 class ResConfigSettings(models.TransientModel):
@@ -34,4 +36,6 @@ class ResConfigSettings(models.TransientModel):
     order_number = fields.Boolean(related='pos_config_id.order_number',readonly=False)
     customer_email = fields.Boolean(related='pos_config_id.customer_email',readonly=False)
     customer_vat = fields.Boolean(related='pos_config_id.customer_vat',readonly=False)
-    
+    branch_address = fields.Boolean(related='pos_config_id.branch_address',readonly=False)
+    address_details = fields.Text(related='pos_config_id.address_details',readonly=False)
+    invoice_print = fields.Boolean(related='pos_config_id.invoice_print',readonly=False)

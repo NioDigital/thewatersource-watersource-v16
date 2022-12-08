@@ -20,7 +20,7 @@
         'point_of_sale.assets': [
             'pos_extend_receipt_app/static/src/js/pos.js',
             'pos_extend_receipt_app/static/src/js/model.js',
-            'pos_extend_receipt_app/static/src/xml/pos.xml',
+            'pos_extend_receipt_app/static/src/xml/*',
 
         ],              
     },
