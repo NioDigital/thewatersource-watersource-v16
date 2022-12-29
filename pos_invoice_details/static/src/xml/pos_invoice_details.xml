@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+	<t t-name="PartnerLine" t-inherit="point_of_sale.PartnerLine" t-inherit-mode="extension" owl="1">
+		<xpath expr="//td[hasclass('partner-line-last-column-placeholder')]" position="after">
+			<td>
+				<button class="view_invoices" t-on-click.stop="show_all_invoices" t-att-id='props.partner.id'>
+					<i class="fa fa-filter"></i>
+					View Invoices
+				</button>
+			</td>
+		</xpath>
+	</t>
+
+	<t t-name="InvoiceListScreenWidget" owl="1">
+		<div class="partnerlist-screen screen">
+			<div class="invoice-screen-content">
+				<section class="top-content">
+					<span class='button back' t-on-click="clickBack">
+						<i class='fa fa-angle-double-left'></i>
+						Back
+					</span>
+				</section>
+				<span class="searchbox">
+					<input placeholder="Search Invoice" t-on-keyup="keyup_invoice_search" class="invoice_search" />
+					<span class="search-clear"></span>
+				</span>
+				<section class="full-content">
+					<div class='window'>
+						<section class='subwindow collapsed'>
+							<div class='wk_subwindow-container collapsed'>
+								<div class='subwindow-container-fix invoice-details-contents'></div>
+							</div>
+						</section>
+						<section class='subwindow' style="display: table;">
+							<div class='subwindow-container-fix touch-scrollable scrollable-y '>
+								<table class='wk_invoice_table'>
+									<thead>
+										<tr class="wk_invoice_table_header" style="background-color: rgb(188, 214, 216);">
+											<th class="all_invoice_table_data">Invoice Number</th>
+											<th class="all_invoice_table_data">Date</th>
+											<th class="all_invoice_table_data">Salesperson</th>
+											<th class="all_invoice_table_data">Total</th>
+											<th class="all_invoice_table_data">Balance</th>
+										</tr>
+									</thead>
+									<tbody class='invoice-list-contents'></tbody>
+								</table>
+							</div>
+						</section>
+					</div>
+				</section>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="WkInvoiceLine">
+		<tr class="invoice-line" t-on-click="select_line" t-att-data-id='invoice.id'>
+			<td class="all_invoice_table_data">
+				<t t-esc='invoice.name' />
+			</td>
+			<td class="all_invoice_table_data">
+				<t t-esc='invoice.invoice_date' />
+			</td>
+			<td class="all_invoice_table_data">
+				<t t-esc='invoice.invoice_user_id[1]' />
+			</td>
+			<td class="all_invoice_table_data">
+				<t t-esc='widget.env.pos.format_currency(invoice.amount_total)' />
+			</td>
+			<td class="all_invoice_table_data">
+				<t t-esc='widget.env.pos.format_currency(invoice.amount_residual)' />
+			</td>
+		</tr>
+	</t>
+
+	<t t-name="PartnerListScreen" t-inherit="point_of_sale.PartnerListScreen" t-inherit-mode="extension" owl="1">
+		<xpath expr="//table[hasclass('partner-list')]//thead//tr" position="inside">
+			<th>Invoices</th>
+		</xpath>
+	</t>
+
+	<t t-name="InvoiceDetails">
+		<section class='invoice-details' style="border-bottom: solid 5px rgb(110,200,155);">
+			<div class='partner-details-box clearfix' style="background-color: rgb(252, 252, 252);">
+				<div class='partner-details-left' style="margin-bottom: 1%;">
+					<div class='partner-detail'>
+						<h2 style="margin-left: 5.6%;color: rgb(67, 134, 111);">Invoice Details</h2>
+					</div>
+					<div class="wk_invoice_state">
+						<h2>
+							<t t-esc="invoice.state? invoice.state[0].toUpperCase() + invoice.state.slice(1) : ''" />
+						</h2>
+					</div>
+					<div class='partner-detail' style="margin-left: 3.3%;">
+						<span class='label'>Number:</span>
+						<span class='detail partner-address'>
+							<t t-esc='invoice.name' />
+						</span>
+					</div>
+					<t t-if="invoice.partner_id">
+						<div class='partner-detail' style="margin-left: 5.3%;">
+							<span class='label'>Customer:</span>
+							<span class='detail partner-address'>
+								<t t-esc='invoice.partner_id[1]' />
+							</span>
+						</div>
+					</t>
+					<t t-if="!invoice.partner_id">
+						<div class='partner-detail' style="margin-left: 5.3%;">
+							<span class='label'>Customer:</span>
+							-
+						</div>
+					</t>
+				</div>
+				<div class='partner-details-right' style="margin-right: -20%;">
+					<img id="close_invoice_details" src="/pos_invoice_details/static/src/img/icon-cross.png" style="cursor: pointer;position: absolute;left: 96%;top: 3%;" />
+					<div style="width:415px;text-align:center;margin-top:20px">
+						<span class='label'>Date:</span>
+						<span class='detail partner-id'>
+							<t t-esc='invoice.invoice_date' />
+						</span>
+					</div>
+				</div>
+				<div class='invoice-detail' style="overflow-y:scroll;max-height:190px;width: 100%;text-align: left;margin-left: 3%;">
+					<table border="1" frame="void" rules="rows" id="invoice_line_content" style="border-collapse:collapse;width: 94%;text-align:center;border-bottom: 3px solid rgb(70, 150, 110);">
+						<tr style="color: rgb(51, 112, 39);border-bottom: 3px solid rgb(67, 134, 111);">
+							<th style="text-align:left;width: 35%;">Product</th>
+							<th style="width: 19%;">Account</th>
+							<th style="width: 10%;">Quantity</th>
+							<th style="width: 10%;">Unit Price</th>
+							<th style="width: 10%;">Taxes</th>
+							<th style="width: 10%;">Amount</th>
+						</tr>
+						<t t-foreach='invoicelines' t-as='line'>
+							<tr>
+								<td style="text-align:left">
+									<t t-esc="line.product_id[1]" />
+								</td>
+								<td>
+									<t t-esc="line.account_id[1]" />
+								</td>
+								<td style="text-align: center;">
+									<t t-esc="line.quantity" />
+								</td>
+								<td>
+									<t t-esc="widget.env.pos.format_currency(line.price_unit)" />
+								</td>
+								<td>
+									<t t-foreach="line.tax_ids" t-as="tax_id">
+										<t t-esc="widget.env.pos.taxes_by_id[tax_id].name" />
+									</t>
+								</td>
+								<td>
+									<t t-esc="widget.env.pos.format_currency(line.price_subtotal)" />
+								</td>
+							</tr>
+						</t>
+					</table>
+				</div>
+				<div style="margin-top: 1%;margin-bottom: 1%;float: right;margin-right: 5.8%;">
+					<div class='invoice-detail'>
+						<span class='label'>Total: </span>
+						<span class='detail' style="color: rgb(67, 134, 111);font-weight: bold;">
+							<t t-esc='widget.env.pos.format_currency(invoice.amount_total)' />
+						</span>
+					</div>
+				</div>
+				<div style="margin-top: 1%;margin-bottom: 1%;float: right;margin-right: 5.8%;">
+					<div class='invoice-detail'>
+						<span class='label'>Balance: </span>
+						<span class='detail selected_line_residual_amount' style="color: rgb(67, 134, 111);font-weight: bold;">
+							<t t-esc='widget.env.pos.format_currency(invoice.amount_residual)' />
+						</span>
+					</div>
+				</div>
+			</div>
+		</section>
+	</t>
+</templates>

@@ -1,0 +1,47 @@
+/* Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) */
+/* See LICENSE file for full copyright and licensing details. */
+/* License URL : <https://store.webkul.com/license.html/> */
+.wk_invoice_table_body{
+	margin-top: 65px;
+	overflow: scroll;
+	height: 83%;
+}
+.wk_invoice_state{
+	margin-top:-67px;
+	color:rgb(67, 134, 111);
+	float: right;
+}
+.wk_invoice_table{
+	background: white;
+	font-size: 16px;
+	width: 100%;	
+	line-height: 40px;
+}
+.highlight{
+	background: none repeat scroll 0% 0% #E6E6E6;
+}	
+.wk_invoice_table tr:nth-child(odd){ 
+	background: #E6E6E6;
+}
+.wk_invoice_table tr:nth-child(even){
+	background: white;
+}
+.wk_table_header {
+  background: #b3cccc !important;	
+}
+.all_invoice_table_data{
+	padding-left: 15px;
+	text-align: left;
+}
+.wk_highlight{
+	background: #64BC88;
+	color: white;
+}
+.invoice-screen-content{
+    margin: 0px auto;
+    max-width: 98%;
+    text-align: left;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}

@@ -1,0 +1,371 @@
+/* Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) */
+
+
+/* See LICENSE file for full copyright and licensing details. */
+
+
+/* License URL : <https://store.webkul.com/license.html/> */
+
+.wk_register_payment_popup {
+	font-family: sans-serif;
+	background-color: white;
+	text-align: center;
+	position: fixed;
+	left: 18%;
+	top: 21%;
+	width: 830px;
+	border-radius: 3px;
+	box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+	animation: jelly 0.5s ease-in-out;
+	z-index: 500;
+  }
+  .control-button.wk_register_payment{
+		background:rgb(110,200,155);
+		color:white;
+		cursor: pointer;
+		margin-top:10px;
+		margin-left:143px;
+		width:112px;
+	}
+	.control-button.wk_register_payment:hover {
+		background-color: #6eb692;
+	}
+  
+  .wk_register_payment_popup .wk_title {
+	animation: image_move 0.75s 0.07s ease-in-out;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+	height: 86px;  
+	margin-top:2px;
+	margin-bottom: 2px;
+	/* background: #ffecec */
+  }
+  .text_shake {
+	animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+	transform: translate3d(0, 0, 0);
+	backface-visibility: hidden;
+	perspective: 1000px;
+  }
+  
+  @keyframes image_move {
+	0% {
+	  transform: translateY(0px);
+	}
+	50% {
+	  transform: translateY(-10px);
+	}
+	75% {
+	  transform: translateY(5px);
+	}
+	100% {
+	  transform: translateY(0px);
+	}
+  }
+  
+  @keyframes shake {
+	10%, 90% {
+	  transform: translate3d(-1px, 0, 0);
+	}
+	
+	20%, 80% {
+	  transform: translate3d(2px, 0, 0);
+	}
+  
+	30%, 50%, 70% {
+	  transform: translate3d(-4px, 0, 0);
+	}
+  
+	40%, 60% {
+	  transform: translate3d(4px, 0, 0);
+	}
+  }
+  .table_data_cells{
+	  padding-left: 2%;
+	  width:25%;
+	  
+  }
+  .payment_amount{
+	border: 1px solid #cecbcb;
+	font-size: 16px;
+	margin-top: -10px;
+	padding: 8px;
+	color: green;
+  }
+  .payment_amount:focus{
+	box-shadow: 0px 0px 0px 2px #6EC89B inset;
+	outline: none; 
+	border-radius:5px;
+  }
+  
+  
+  .button.register_payment:hover {
+	background-color: #6eb692;
+  }
+  
+  .button.register_payment {
+	background-color: #6ec89b;
+	color: white;
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 10px 32px;
+	margin-top: 15px;
+	cursor: pointer;
+	width:123px;
+  display: none;
+	margin-bottom: 8px;
+  }
+  
+  .button.cancel_credit_line:hover {
+	background-color: rgb(168, 89, 89);
+  }
+  
+  .button.cancel_credit_line {
+	background-color: #db8b8b;
+	color: white;
+	font-size: 20px;
+	border-radius: 5px;
+	padding: 10px 32px;
+	margin-top: 15px;
+	cursor: pointer;
+	width:123px;
+  
+	margin-bottom: 8px;
+  }
+  
+  @keyframes jelly {
+	0% {
+	  transform: translateY(0px) scale(0.7);
+	  opacity: 0;
+	}
+	70% {
+	  transform: translateY(5px) scale(1.05);
+	  opacity: 1;
+	}
+	100% {
+	  transform: translateY(0px) scale(1);
+	  opacity: 1;
+	}
+  }
+
+  .wallet_input{
+	width: 206px;
+	height: 33px;
+	font-size: 16px;
+	margin-left: 23px;
+	color: green;
+	text-align: center;
+  }
+  .wallet_input:focus{
+	outline: none; 
+  }
+  
+  .wallet-holder {
+	  position: absolute;
+	  width: 45%;
+	  max-height:110px;
+	  margin-left: 5%;
+	  box-shadow:0px 2px 2px 2px #bcbcbc;
+	  overflow-y: auto;
+	  display: none;
+  }
+  .wallet-holder input {
+	  width: 146px;
+	  border: 1px solid rgba(0,120,0,.6);
+	  margin-top:1px;
+  }
+  .wallet-holder ul {
+	  display: none;
+	  list-style: none;
+	  margin: 0;
+	  padding: 0;
+  }
+  .wallet-holder li {
+	  list-style-type:none;
+	  padding: 5px;
+  }
+  .wallet-holder li:hover {
+	  cursor: pointer;
+  }
+  .wallet-holder li:hover, li.active {
+	   background: hsl(200, 40%, 80%);
+  }
+   .wallet-name {
+	  font-weight: bold;
+	  display: block;
+	  height: 19px;
+	  font-size: 14px;
+	  padding-top: 8px;
+   }
+  .wallet-description {
+	  font-style: italic;
+	  font-size: 11px;
+	  color: #999;
+  }
+  
+  .wk-alert {
+	background-color: white;
+	padding: 20px;
+	border-radius: 5px;
+	text-align: center;
+	position: fixed;
+	left: 33%;
+	top: 21%;
+	width: 40%;
+	  box-shadow: 0px 4px 15.36px 0.64px rgba(0, 0, 0, 0.1), 0px 2px 6px 0px rgba(0, 0, 0, 0.12);
+	animation: jelly 0.5s ease-in-out;
+	}
+
+  
+  .wk-alert h2 {
+	color: #575757;
+	font-size: 21px;
+	margin-top:10px;
+	}
+	.wk-alert p {
+	color: #797979;
+	font-size: 16px;
+	margin-top:0px;
+  }
+  
+
+  .credit_line  {
+	  text-align: left;
+	  width:100%;
+  }
+  
+  .credit_line tr {
+	  background: rgb(247,247,247);
+	  border: 2px solid #dfdfdf;
+  }
+  .credit_line th{
+	padding: 10px 8px;
+	font-size: initial;
+  }
+  .credit_line td {
+	  padding: 10px 8px;
+	  font-size: initial;
+	  font-weight: normal;
+	}
+	
+	.credit_line tr:nth-child(odd){ 
+		background: #E6E6E6;
+	}
+	.credit_line tr:nth-child(even){
+		background: white;
+	}
+  
+  .wk-alert button.cancel:hover {
+	  background-color: #7ecff4;
+  }
+  
+  .wk-alert button.cancel {
+	  background-color: #8CD4F5;
+	  color: white;
+	  font-size: 20px;
+	  border-radius: 5px;
+	  padding: 10px 32px;
+	  margin-top: 26px;
+	  cursor: pointer;
+  }
+  div.wk_mark {
+	  height: 85px;
+	  width: 85px;
+	  border-radius: 100px;
+	  border:3px solid #ff8d8d;
+  }
+  
+  div.wk_mark:after {
+	  content:"\d7";
+	  font-size:100px;
+	  color:#ff8d8d;
+	  top: -13px;
+	  position: relative;
+  }
+  
+  .wallet_status {
+	  border: 2px solid rgba(0, 0, 0, 0.2);
+	  border-left-color: #5cb85c;
+	  animation-name: load_order;
+	  animation-duration: .5s;
+	  display:none;
+  }
+  
+  ul.wk_tabs{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+  }
+  ul.wk_tabs li{
+	background: none;
+	color: #222;
+	display: inline-block;
+	padding: 10px 15px;
+	cursor: pointer;
+  }
+  
+  ul.wk_tabs li.current{
+	background: #ededed;
+	color: #222;
+	border:2px solid #ededed;
+	border-bottom: none;
+  }
+  
+  .tab-content{
+	max-height: 227px;
+	min-height: 200px;
+	overflow-y: scroll;
+	border-top: 3px solid  #ededed;
+	border-bottom: 3px solid  #ededed;
+	display: none;
+	background: #ededed;
+	padding: 15px;
+  }
+  
+  .tab-content.current{
+	display: inherit;
+  }
+  .fa.fa-info-circle.wkorderline{
+	cursor: pointer;
+  }
+  .fa.fa-info-circle.wkorderline:hover{
+	color: #2196F3;
+  }
+  .wk_slice-left{
+	background: url(/pos_forced_credit_line/static/description/Sprite-Icon-1.png) no-repeat 0 0;
+	width: 20px;
+	height: 20px;
+	top: 5px;
+	position: relative;
+	display: inline-block;
+	}
+
+	.payment_tab  {
+	  text-align: left;
+		width:100%;
+		background: white;
+	}
+  .payment_tab th{
+		padding: 31px 30px;
+		font-size: 14px;
+		font-weight: bold;	
+  }
+  .payment_tab td {
+	  padding: 31px 30px;
+	  font-size: 14px;
+	  font-weight: bold;
+	}
+
+	.wk_payment_journal{
+		padding: 4px;
+    border-radius: 3px;
+    border: solid 1px #cecbcb;
+    margin-bottom: 4px;
+    background: white;
+    font-family: "Lato","Lucida Grande", Helvetica, Verdana, Arial;
+    color: #555555;
+    width: 197px;
+    font-size: 14px;
+		box-sizing: border-box;
+		height: 37px;
+	}

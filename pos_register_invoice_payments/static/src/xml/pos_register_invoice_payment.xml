@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright (c) 2016-Present Webkul Software Pvt. Ltd. (<https://webkul.com/>) -->
+<!-- See LICENSE file for full copyright and licensing details. -->
+<!-- License URL : <https://store.webkul.com/license.html/> -->
+<templates id="template" xml:space="preserve">
+	<t t-name="InvoiceDetails" t-inherit="pos_invoice_details.InvoiceDetails" t-inherit-mode="extension" owl="1">
+		<xpath expr="//div[hasclass('partner-details-right')]//img" position="after">
+			<div class='control-button wk_register_payment'>Payments</div>
+		</xpath>
+	</t>
+
+	<t t-name="RegisterPaymentPopup" owl="1">
+		<div role="dialog" class="modal-dialog">
+			<div class="wk_register_payment_popup" style="padding:10px;overflow:hidden;margin-top:-41px;">
+				<div style="overflow:hideen">
+					<div class="wk_title">
+						<t t-if="props and props.invoice">
+							<h1 style="color:#37b47b">
+								<b>
+									<t t-esc="props.invoice.number" />
+								</b>
+							</h1>
+							<h3 class="wk_residual_amount" style="color:#37b47b">
+								Amount Due :
+								<t t-esc="env.pos.format_currency(props.invoice.amount_residual)" />
+							</h3>
+						</t>
+					</div>
+					<div class="body">
+						<t t-if="props">
+							<div id="tabs" style="font-size:12px">
+								<ul class="wk_tabs">
+									<li class="tab-link reconsile current" id="#reconsile_tab" t-on-click="clickTabChange" style=" font-size: 18px !important;">
+										<b id="#reconsile_tab">Unreconciled</b>
+									</li>
+									<li class="tab-link outstanding_credits" id="#outstanding_credits_tab" t-on-click="clickTabChange" style="font-size: 18px !important;">
+										<b id="#outstanding_credits_tab">Outstanding Credits</b>
+									</li>
+									<li class="tab-link manual_payment" id="#register_payment_tab" t-on-click="clickTabChange" style=" font-size: 18px !important;">
+										<b id="#register_payment_tab">Register Payment</b>
+									</li>
+								</ul>
+							</div>
+							<div id="reconsile_tab" class="tab-content current">
+								<table class="credit_line">
+									<thead>
+										<tr style="background:#c1d7d9">
+											<th>
+												Name
+											</th>
+											<th>
+												Date
+											</th>
+											<th>
+												Payment Method
+											</th>
+											<th>
+												Memo
+											</th>
+											<th>
+												Amount
+											</th>
+											<th>
+												Remove
+											</th>
+										</tr>
+									</thead>
+									<tbody class='payment-widget-list-contents'></tbody>
+								</table>
+							</div>
+							<div id="outstanding_credits_tab" class="tab-content">
+								<table class="credit_line">
+									<thead>
+										<tr style="background:#c1d7d9">
+											<th>
+												Journal Name
+											</th>
+											<th>
+												Amount
+											</th>
+											<th>
+												Add Credits
+											</th>
+										</tr>
+									</thead>
+									<tbody class='outstanding-credit-list-contents'></tbody>
+								</table>
+							</div>
+							<div id="register_payment_tab" class="tab-content">
+								<table class="payment_tab">
+									<tr>
+										<td class="credit_line_id">Payment Amount</td>
+										<td>
+											<input t-att-value='props.invoice ? props.invoice.amount_residual:""' class="payment_amount" type="number" />
+										</td>
+
+										<td class="credit_line_id">Memo</td>
+										<td>
+											<t t-if="props.invoice">
+												<input t-att-value='props.invoice.name != false ? props.invoice.name:""' class="payment_memo" />
+											</t>
+										</td>
+									</tr>
+									<tr>
+										<td class="credit_line_id">Payment Journal</td>
+										<td>
+											<select class='wk_payment_journal' name='journal_id'>
+												<option value=''>None</option>
+												<t t-foreach='env.pos.journals' t-as='method' t-key="method.id">
+													<option t-att-selected="method.id? method.id : undefined" t-att-value='method.id'>
+														<t t-esc='method.name' />
+													</option>
+												</t>
+											</select>
+										</td>
+									</tr>
+								</table>
+							</div>
+						</t>
+					</div>
+					<div style="float:right">
+						<button class="button cancel_credit_line" t-on-click="cancel">Cancel</button>
+						<button class="button register_payment" t-on-click="clickRegisterPayment">Validate</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+
+	<t t-name="WkPaymentWidgetline">
+		<tr>
+			<td class="credit_line_id">
+				<t t-esc="content.name" />
+			</td>
+			<td class="credit_line_id">
+				<t t-esc="content.date" />
+			</td>
+			<td class="credit_line_id">
+				<t t-esc="content.journal_name" />
+			</td>
+			<td class="credit_line_id">
+				<t t-esc="content.ref" />
+			</td>
+			<td class="credit_line_id">
+				<t t-esc="widget.pos.format_currency(content.amount)" />
+			</td>
+			<td class="credit_line_id">
+				<button class='reconsile_line' t-att-id='content.partial_id'>Unreconciled</button>
+			</td>
+		</tr>
+	</t>
+
+	<t t-name="WkOutstandingCreditline">
+		<tr>
+			<td class="credit_line_id">
+				<t t-esc="content.journal_name" />
+			</td>
+			<td class="credit_line_id">
+				<t t-esc="widget.pos.format_currency(content.amount)" />
+			</td>
+			<td class="credit_line_id">
+				<button class='outstanding_credit_line' t-att-id='content.id'>Add</button>
+			</td>
+		</tr>
+	</t>
+</templates>
