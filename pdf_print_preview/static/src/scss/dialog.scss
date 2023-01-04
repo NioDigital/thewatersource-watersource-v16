@@ -25,10 +25,10 @@ a.preview-dialog-btn {
 	opacity: 0.3;
 	filter: alpha(opacity=20);
 
-	&:hover , &:focus {
+	 &:hover , &:focus {
 		opacity: 0.5;
 		filter: alpha(opacity=50);
-	}
+	} 
 }
 
 button.preview-dialog-btn {
@@ -42,7 +42,7 @@ button.preview-dialog-btn {
 	&:hover , &:focus {
 		opacity: 0.5;
 		filter: alpha(opacity=50);
-	}
+	} 
 }
 
 button.preview-close {
@@ -79,11 +79,12 @@ button.preview-minimize {
 	left: 0;
 	overflow: hidden;
 	min-width: 100%;
+	}
 
 	.modal-dialog {
 		position: fixed;
-		margin: 0;
-		width: 100%;
+		margin: 0px 50px;
+		width: 80%;
 		height: 100%;
 		padding: 0;
 	}
@@ -99,19 +100,21 @@ button.preview-minimize {
 	.modal-header {
 		position: absolute;
 		top: 0;
+		padding: 0px 20px;
 		right: 0;
 		left: 0;
-		height: 50px;
+		height: 80px;
 	}
 
 	.modal-body {
-		position: absolute;
-		top: 50px;
-		bottom: 60px;
-		width: 100%;
-		font-weight: 300;
-		overflow: auto;
-	}
+    position: absolute;
+    top: 50px;
+    bottom: 60px;
+    margin: 40px 60px;
+    width: 90%;
+    font-weight: 300;
+    overflow: auto;
+}
 
 	.modal-footer {
 		position: absolute;
@@ -119,5 +122,6 @@ button.preview-minimize {
 		bottom: 0;
 		left: 0;
 		height: 60px;
+		display: none;
 	}
-}
+

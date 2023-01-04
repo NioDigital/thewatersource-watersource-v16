@@ -6,7 +6,19 @@
 #   License URL : <https://store.webkul.com/license.html/>
 #
 #################################################################################
-from odoo import api, models
+from odoo import api, models,fields
+
+class AccountMove(models.Model):
+    _inherit = 'account.move'
+
+    shop_address = fields.Text('shop address',compute='get_shop_address')
+
+    def get_shop_address(self):
+        self.shop_address = ''
+        if self.ref:
+            pos_order = self.env['pos.order'].search([('name','=',self.ref)])
+            if pos_order:
+                self.shop_address = pos_order.session_id.config_id.receipt_header
 
 class PosOrder(models.Model):
     _inherit = 'pos.order'

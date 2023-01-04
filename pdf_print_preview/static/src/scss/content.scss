@@ -21,21 +21,22 @@
 .o_preview_viewerjs iframe {
 	position: absolute;
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 100% !important;
+	height: 100% !important;
 }
 
 .o_preview_pdfjs,
 .o_preview_pdfjs iframe {
 	position: absolute;
 	display: block;
-	width: 100%;
-	height: 100%;
+	width: 100% !important;
+	height: 100% !important;
 }    
     
 
 .o_preview_unsupported {
 	padding: 20px 30px 20px 30px;
+	}
 	
 	.o_preview_unsupported_body {
 		padding-top: 25px;
@@ -65,7 +66,7 @@
 		padding-top: 25px;
 		padding-bottom: 5px;
 	}
-}
+
 
 .loader {
 	height: 20px;
@@ -76,6 +77,7 @@
 	left: 0;
 	right: 0;
 	margin: auto;
+	}
 	
 	.loader--dot {
 		animation-name: loader;
@@ -122,7 +124,7 @@
 
 	.loader--text {
 		position: absolute;
-		top: 200%;
+		top: 100%;
 		left: 0;
 		right: 0;
 		width: 4rem;
@@ -172,4 +174,4 @@
 			content: "Loading...";
 		}
 	}
-}
+

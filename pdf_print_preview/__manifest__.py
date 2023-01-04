@@ -45,7 +45,7 @@
         "views/res_users.xml"
     ],
     "assets": {
-        "web.assets_backend": [
+        "point_of_sale.assets": [
             "pdf_print_preview/static/src/scss/dialog.scss",
             "pdf_print_preview/static/src/scss/content.scss",
             "pdf_print_preview/static/src/js/dialog.js",
