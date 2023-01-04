@@ -18,7 +18,9 @@ class StockPicking(models.Model):
     def _onchange_picking_type(self):
         ctx = self._context.copy()
         if not ctx.get('is_warehouse_stock_request'):
-            return super(StockPicking, self).onchange_picking_type()
+            for rec in self:
+                rec.location_dest_id = rec.picking_type_id.default_location_dest_id.id
+
         # if self.picking_type_id and self.state == 'draft' and not ctx.get('is_warehouse_stock_request'):
         #     self = self.with_company(self.company_id)
         #     if self.picking_type_id.default_location_src_id:
