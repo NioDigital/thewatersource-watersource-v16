@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="sale_vendor_report__wizard_view" model="ir.ui.view">
+            <field name="name">vendor.report.wizard</field>
+            <field name="model">vendor.report.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Vendor Filter Report">
+                    <sheet>
+                        <group>
+                            <field name="date_from"/>
+                            <field name="date_to"/>
+                            <field name="vendor_ids" widget="many2many_tags"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button string="Print Report" name="vendor_filter_report" type="object" class="oe_highlight" data-hotkey="q"/>
+                        <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_vendor_filter_wizard">
+            <field name="name">Vendor Filter Report</field>
+            <field name="res_model">vendor.report.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+        <record id="sale_vendor_report_tree" model="ir.ui.view">
+            <field name="name">vendor.filter.report</field>
+            <field name="model">vendor.filter.report</field>
+            <field name="arch" type="xml">
+                <tree string="Vendor Filter Report" create="0">
+                    <field name="vendor"/>
+                    <field name="product_id"/>
+                    <!-- <field name="purchase_price"/> -->
+                    <field name="purchase_qty"/>
+                    <field name="sale_qty"/>
+                    <!-- <field name="sale_price"/> -->
+                    <field name="onhand"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_vendor_filter_report">
+            <field name="name">Vendor Filter Report</field>
+            <field name="res_model">vendor.filter.report</field>
+            <field name="view_mode">tree</field>
+        </record>
+    
+        <menuitem id="vendor_report_menu_wizard" name="Vendor Filter Report" action="action_vendor_filter_wizard" parent="sale.sale_order_menu"/>
+
+    </data>
+</odoo>
